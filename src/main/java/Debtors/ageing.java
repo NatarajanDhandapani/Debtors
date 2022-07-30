@@ -175,7 +175,7 @@ class master {
 
 public class ageing {
 	public static void main(String[] args) throws IOException, Exception, InvalidFormatException {
-		System.out.println("Updated on 28-Jul-22 @ 08.00 hrs dhandapani " +System.getProperty("user.dir"));
+		System.out.println("Updated on 28-Jul-22 @ 08.00 hrs dhandapani " + System.getProperty("user.dir"));
 		@SuppressWarnings("resource")
 		XSSFWorkbook wb = new XSSFWorkbook();
 		CellStyle Title = null;
@@ -298,11 +298,18 @@ public class ageing {
 		int row = 5;
 		int col = 1;
 		DateTimeFormatter ft = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		String reportdt = "25.07.2022";
+		String reportdt = "29.07.2022";
 		// Aging bucket conditions
 		int[][] bucket1 = { { 0, 30 }, { 31, 60 }, { 61, 90 }, { 91, 120 }, { 121, 150 }, { 151, 180 }, { 181, 2000 } };
-		int[][] bucket2 = { { -60, 0 }, { 1, 180 }, { 181, 360 }, { 361, 720 }, { 721, 1080 }, { 1081, 2000 },
+		
+		int[][] bucket2 = { { -260, 0 }, { 0,30 }, { 31,60 }, { 61,90 }, { 91,120 }, { 121,150 },
+				{ 151,2099 } };
+		
+		int[][] bucket3 = { { -100, 0 }, { 1, 180 }, { 181, 360 }, { 361, 720 }, { 721, 1080 }, { 1081, 2000 },
 				{ 2001, 2099 } };
+	
+		
+		
 		String[][] buckethead = { { "<30 days", "Not due" }, { "31-60 days", "<Six Months" },
 				{ "61-90 days", "6m-12 month" }, { "91-120 days", "13-24 monrh" }, { "121-150 days", "25-36 monrh" },
 				{ "151-180 days", ">36 month" }, { ">181 days", ">61 months" } };
@@ -358,7 +365,7 @@ public class ageing {
 		Map<Integer, Integer> duedays = code.stream().collect(Collectors.toMap(master::getCode, master::getDays));
 		// updating ledger
 		sl = 0;
-		// c = 0;
+		int c = 0;
 		List<ledger> trans = new ArrayList<ledger>();
 		List<ledger> sch3 = new ArrayList<ledger>();
 		System.out.println("updating ledger");
@@ -383,7 +390,7 @@ public class ageing {
 							r.getCell(7).getNumericCellValue());
 					ledger a2 = new ledger(r.getCell(0).getStringCellValue().trim(), sl, schedule3.get(days1),
 							r.getCell(7).getNumericCellValue());
-					// System.out.println(c++);
+					System.out.println(c++ + "-" + sl);
 					trans.add(a1);
 					sch3.add(a2);
 				}
