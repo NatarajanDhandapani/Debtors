@@ -175,7 +175,7 @@ class master {
 
 public class ageing {
 	public static void main(String[] args) throws IOException, Exception, InvalidFormatException {
-		System.out.println("Updated on 02-aug-2022 " + System.getProperty("user.dir"));
+		System.out.println("Updated on 02-aug-2022 @ 21.35 hrs" + System.getProperty("user.dir"));
 		@SuppressWarnings("resource")
 		XSSFWorkbook wb = new XSSFWorkbook();
 		CellStyle Title = null;
