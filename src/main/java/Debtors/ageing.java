@@ -175,7 +175,7 @@ class master {
 
 public class ageing {
 	public static void main(String[] args) throws IOException, Exception, InvalidFormatException {
-		System.out.println("Updated on 28-Jul-22 @ 08.00 hrs dhandapani " + System.getProperty("user.dir"));
+		System.out.println("Updated on 02-aug-2022 " + System.getProperty("user.dir"));
 		@SuppressWarnings("resource")
 		XSSFWorkbook wb = new XSSFWorkbook();
 		CellStyle Title = null;
@@ -298,7 +298,7 @@ public class ageing {
 		int row = 5;
 		int col = 1;
 		DateTimeFormatter ft = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		String reportdt = "29.07.2022";
+		String reportdt = "31.07.2022";
 		// Aging bucket conditions
 		int[][] bucket1 = { { 0, 30 }, { 31, 60 }, { 61, 90 }, { 91, 120 }, { 121, 150 }, { 151, 180 }, { 181, 2000 } };
 		
@@ -390,7 +390,7 @@ public class ageing {
 							r.getCell(7).getNumericCellValue());
 					ledger a2 = new ledger(r.getCell(0).getStringCellValue().trim(), sl, schedule3.get(days1),
 							r.getCell(7).getNumericCellValue());
-					System.out.println(c++ + "-" + sl);
+				//System.out.println(c++ + "-" + sl);
 					trans.add(a1);
 					sch3.add(a2);
 				}
