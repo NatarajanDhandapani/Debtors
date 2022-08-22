@@ -1,6 +1,5 @@
 package Debtors;
-
-//change completed on 26.07.22 @ 08.00 hrs bucket_change created
+// last updated 22.08.22 @ 07.30 hrs
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,45 +32,35 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.PropertyTemplate;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 class ledger {
 	public String co;
 	public int code;
 	public int bucket;
 	public double amount;
-
 	public int getBucket() {
 		return bucket;
 	}
-
 	public void setBucket(int bucket) {
 		this.bucket = bucket;
 	}
-
 	public String getCo() {
 		return co;
 	}
-
 	public void setCo(String co) {
 		this.co = co;
 	}
-
 	public int getCode() {
 		return code;
 	}
-
 	public void setCode(int code) {
 		this.code = code;
 	}
-
 	public double getAmount() {
 		return amount;
 	}
-
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-
 	public ledger(String co, int code, int bucket, double amount) {
 		this.co = co;
 		this.code = code;
@@ -79,7 +68,6 @@ class ledger {
 		this.amount = amount;
 	}
 }
-
 class master {
 	public int code;
 	public String name;
@@ -89,7 +77,6 @@ class master {
 	public double deposit;
 	public double ecl;
 	public int days;
-
 	public master(int code, String status, String name, String group, String panno, double deposit, double ecl,
 			int days) {
 		super();
@@ -102,80 +89,63 @@ class master {
 		this.ecl = ecl;
 		this.days = days;
 	}
-
 	public int getCode() {
 		return code;
 	}
-
 	public void setCode(int code) {
 		this.code = code;
 	}
-
 	public String getStatus() {
 		return status;
 	}
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getGroup() {
 		return group;
 	}
-
 	public void setGroup(String group) {
 		this.group = group;
 	}
-
 	public String getPanno() {
 		return panno;
 	}
-
 	public void setPanno(String panno) {
 		this.panno = panno;
 	}
-
 	public double getDeposit() {
 		return deposit;
 	}
-
 	public void setDeposit(double deposit) {
 		this.deposit = deposit;
 	}
-
 	public double getEcl() {
 		return ecl;
 	}
-
 	public void setEcl(double ecl) {
 		this.ecl = ecl;
 	}
-
 	public int getDays() {
 		return days;
 	}
-
 	public void setDays(int days) {
 		this.days = days;
 	}
-
 	@Override
 	public String toString() {
 		return name + " ~" + status + "~" + group + "~ " + panno;
 	}
 }
-
 public class ageing {
 	public static void main(String[] args) throws IOException, Exception, InvalidFormatException {
-		System.out.println("Updated on 02-aug-2022 @ 21.35 hrs" + System.getProperty("user.dir"));
+		System.out.println("updated on " +LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss")) + 
+				System.getProperty("user.dir"));
 		@SuppressWarnings("resource")
 		XSSFWorkbook wb = new XSSFWorkbook();
 		CellStyle Title = null;
@@ -301,15 +271,8 @@ public class ageing {
 		String reportdt = "31.07.2022";
 		// Aging bucket conditions
 		int[][] bucket1 = { { 0, 30 }, { 31, 60 }, { 61, 90 }, { 91, 120 }, { 121, 150 }, { 151, 180 }, { 181, 2000 } };
-		
-		int[][] bucket2 = { { -260, 0 }, { 0,30 }, { 31,60 }, { 61,90 }, { 91,120 }, { 121,150 },
-				{ 151,2099 } };
-		
-		int[][] bucket3 = { { -100, 0 }, { 1, 180 }, { 181, 360 }, { 361, 720 }, { 721, 1080 }, { 1081, 2000 },
+		int[][] bucket2 = { { -90, 0 }, { 1, 180 }, { 181, 360 }, { 361, 720 }, { 721, 1080 }, { 1081, 2000 },
 				{ 2001, 2099 } };
-	
-		
-		
 		String[][] buckethead = { { "<30 days", "Not due" }, { "31-60 days", "<Six Months" },
 				{ "61-90 days", "6m-12 month" }, { "91-120 days", "13-24 monrh" }, { "121-150 days", "25-36 monrh" },
 				{ "151-180 days", ">36 month" }, { ">181 days", ">61 months" } };
@@ -323,7 +286,6 @@ public class ageing {
 				schedule3.put(sl, a);
 		// uac clearing header
 		int sl = 0;
-
 		TreeMap<String, Integer> alpha = new TreeMap<String, Integer>();
 		TreeMap<Integer, String> alphareverse = new TreeMap<Integer, String>();
 		FileInputStream xlsfile = new FileInputStream(
