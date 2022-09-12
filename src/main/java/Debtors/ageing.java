@@ -1,9 +1,11 @@
 package Debtors;
-// last updated 22.08.22 @ 14.30 hrs
+// last updated 12.09.22 @ 07.15 hrs
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -144,8 +146,8 @@ class master {
 }
 public class ageing {
 	public static void main(String[] args) throws IOException, Exception, InvalidFormatException {
-		System.out.println("updated on " +LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yy HH:mm:ss")) + 
-				System.getProperty("user.dir"));
+		System.out.println("updated on " +LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yy hh:mm:ss  ")) + 
+			 	System.getProperty("user.dir"));
 		@SuppressWarnings("resource")
 		XSSFWorkbook wb = new XSSFWorkbook();
 		CellStyle Title = null;
@@ -259,7 +261,7 @@ public class ageing {
 		rightAlignedbody.setFont(font);
 		Date start = new Date();
 		String ddmmyy = null;
-		String filepath = "D:/debtors/drs 2022-23/jul 2022/";
+		String filepath = "D:/debtors/drs 2022-23/Aug 2022/";
 		int days = 0;
 		int days1 = 0;
 		double uacbal = 0.00;
@@ -268,7 +270,7 @@ public class ageing {
 		int row = 5;
 		int col = 1;
 		DateTimeFormatter ft = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		String reportdt = "31.07.2022";
+		String reportdt = "31.08.2022";
 		// Aging bucket conditions
 		int[][] bucket1 = { { 0, 30 }, { 31, 60 }, { 61, 90 }, { 91, 120 }, { 121, 150 }, { 151, 180 }, { 181, 2000 } };
 		int[][] bucket2 = { { -90, 0 }, { 1, 180 }, { 181, 360 }, { 361, 720 }, { 721, 1080 }, { 1081, 2000 },
