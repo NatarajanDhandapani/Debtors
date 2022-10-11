@@ -1,4 +1,5 @@
 package Debtors;
+
 // last updated 14.09.22 @ 07.15 hrs
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -34,35 +35,45 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.PropertyTemplate;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 class ledger {
 	public String co;
 	public int code;
 	public int bucket;
 	public double amount;
+
 	public int getBucket() {
 		return bucket;
 	}
+
 	public void setBucket(int bucket) {
 		this.bucket = bucket;
 	}
+
 	public String getCo() {
 		return co;
 	}
+
 	public void setCo(String co) {
 		this.co = co;
 	}
+
 	public int getCode() {
 		return code;
 	}
+
 	public void setCode(int code) {
 		this.code = code;
 	}
+
 	public double getAmount() {
 		return amount;
 	}
+
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
+
 	public ledger(String co, int code, int bucket, double amount) {
 		this.co = co;
 		this.code = code;
@@ -70,6 +81,7 @@ class ledger {
 		this.amount = amount;
 	}
 }
+
 class master {
 	public int code;
 	public String name;
@@ -79,6 +91,7 @@ class master {
 	public double deposit;
 	public double ecl;
 	public int days;
+
 	public master(int code, String status, String name, String group, String panno, double deposit, double ecl,
 			int days) {
 		super();
@@ -91,63 +104,82 @@ class master {
 		this.ecl = ecl;
 		this.days = days;
 	}
+
 	public int getCode() {
 		return code;
 	}
+
 	public void setCode(int code) {
 		this.code = code;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getGroup() {
 		return group;
 	}
+
 	public void setGroup(String group) {
 		this.group = group;
 	}
+
 	public String getPanno() {
 		return panno;
 	}
+
 	public void setPanno(String panno) {
 		this.panno = panno;
 	}
+
 	public double getDeposit() {
 		return deposit;
 	}
+
 	public void setDeposit(double deposit) {
 		this.deposit = deposit;
 	}
+
 	public double getEcl() {
 		return ecl;
 	}
+
 	public void setEcl(double ecl) {
 		this.ecl = ecl;
 	}
+
 	public int getDays() {
 		return days;
 	}
+
 	public void setDays(int days) {
 		this.days = days;
 	}
+
 	@Override
 	public String toString() {
 		return name + " ~" + status + "~" + group + "~ " + panno;
 	}
 }
+
 public class ageing {
 	public static void main(String[] args) throws IOException, Exception, InvalidFormatException {
-		System.out.println("updated on " +LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yy hh:mm:ss  ")) + 
-			 	System.getProperty("user.dir"));
+		System.out
+				.println("updated on " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yy hh:mm:ss  "))
+						+ System.getProperty("user.dir"));
 		@SuppressWarnings("resource")
 		XSSFWorkbook wb = new XSSFWorkbook();
 		CellStyle Title = null;
@@ -261,7 +293,7 @@ public class ageing {
 		rightAlignedbody.setFont(font);
 		Date start = new Date();
 		String ddmmyy = null;
-		String filepath = "D:/debtors/drs 2022-23/Aug 2022/";
+		String filepath = "D:/debtors/drs 2022-23/sep 2022/";
 		int days = 0;
 		int days1 = 0;
 		double uacbal = 0.00;
@@ -270,11 +302,11 @@ public class ageing {
 		int row = 5;
 		int col = 1;
 		DateTimeFormatter ft = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		String reportdt = "31.08.2022";
+		String reportdt = "30.09.2022";
 		// Aging bucket conditions
-		int[][] bucket1 = { { 0, 30 }, { 31, 60 }, { 61, 90 }, { 91, 120 }, { 121, 150 }, { 151, 180 }, { 181, 2000 } };
-		int[][] bucket2 = { { -90, 0 }, { 1, 180 }, { 181, 360 }, { 361, 720 }, { 721, 1080 }, { 1081, 2000 },
-				{ 2001, 2099 } };
+		int[][] bucket1 = { { 0, 30 }, { 31, 60 }, { 61, 90 }, { 91, 120 }, { 121, 150 }, { 151, 180 }, { 181, 2500 } };
+		int[][] bucket2 = { { -99, 0 }, { 1, 180 }, { 181, 360 }, { 361, 720 }, { 721, 1080 }, { 1081, 2000 },
+				{ 2001, 2599 } };
 		String[][] buckethead = { { "<30 days", "Not due" }, { "31-60 days", "<Six Months" },
 				{ "61-90 days", "6m-12 month" }, { "91-120 days", "13-24 monrh" }, { "121-150 days", "25-36 monrh" },
 				{ "151-180 days", ">36 month" }, { ">181 days", ">61 months" } };
@@ -304,7 +336,7 @@ public class ageing {
 			}
 		}
 		List<master> code = new ArrayList<master>();
-		// int c = 0;
+		int c = 0;
 		sl = 0;
 		sht = xls.getSheetAt(0);
 		for (Row r : sht) {
@@ -329,7 +361,7 @@ public class ageing {
 		Map<Integer, Integer> duedays = code.stream().collect(Collectors.toMap(master::getCode, master::getDays));
 		// updating ledger
 		sl = 0;
-		int c = 0;
+		c = 0;
 		List<ledger> trans = new ArrayList<ledger>();
 		List<ledger> sch3 = new ArrayList<ledger>();
 		System.out.println("updating ledger");
@@ -354,7 +386,7 @@ public class ageing {
 							r.getCell(7).getNumericCellValue());
 					ledger a2 = new ledger(r.getCell(0).getStringCellValue().trim(), sl, schedule3.get(days1),
 							r.getCell(7).getNumericCellValue());
-				//System.out.println(c++ + "-" + sl);
+					System.out.println(c++ + "~" + sl );
 					trans.add(a1);
 					sch3.add(a2);
 				}
